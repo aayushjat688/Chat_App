@@ -8,6 +8,12 @@ import cors from 'cors';
 import fs from 'fs';
 import path from 'path';
 
+const app = express();
+const PORT = process.env.PORT;
+app.get('/',(req,res)=>{
+  res.send('Hello')
+})
+
 //middleware
 app.use(clerkMiddleware());
 app.use(cors({
@@ -27,11 +33,7 @@ if(fs.existsSync(publicDir)) {
   })
 }
 
-const app = express();
-const PORT = process.env.PORT;
-app.get('/',(req,res)=>{
-  res.send('Hello')
-})
+
 
 
 app.listen(PORT , ()=>{
