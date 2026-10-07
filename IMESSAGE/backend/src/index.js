@@ -1,10 +1,28 @@
 // const express = require('express');
+//imports
 import express from 'express'
 import 'dotenv/config';
+import connectDB from './lib/db.js';
+import { clerkMiddleware } from '@clerk/express'
+import cors from 'cors';
+
+//middleware
+app.use(clerkMiddleware());
+app.use(cors({
+  origin:process.env.FRONTEND_URL,
+  credentials:true
+}));
+app.use(express.json());
+
+
+
 const app = express();
 const PORT = process.env.PORT;
 app.get('/',(req,res)=>{
   res.send('Hello')
 })
 
-app.listen(PORT , ()=>{console.log('Server Started at 3000')});
+
+app.listen(PORT , ()=>{
+connectDB();
+  console.log('Server Started at 3000')});
